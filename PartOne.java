@@ -36,13 +36,15 @@ public class PartOne {
                 int itLimit = df.nextInt();
         
                 g.createGraphMatrix();
-                g.printGraphMatrix();
+                // g.printGraphMatrix();
                 ArrayList<Double> pgList = g.calculatePageRank(g.getEdgeList(), errLimit, dampFact, itLimit);
                 if ( pgList != null ) {
                     System.out.print("Result : [");
+                    String res = "";
                     for ( int i = 0; i < pgList.size(); i++ ) {
-                        System.out.print(pgList.get(i) + " ");
+                        res += pgList.get(i) + ", ";
                     }
+                    System.out.print(res.substring(0, res.length() - 2));
                     System.out.print("]");
                 } else {
                     System.out.println("No solution as iteration limit exceeded!");

@@ -76,7 +76,7 @@ public class Graph {
         createGraphMatrix();
         int[][] matrix = getGraphMatrix();
         int N = getVertex();
-        System.out.println("no of vertices: " + N);
+        // System.out.println("no of vertices: " + N);
         double initialPR = 1.0 / N; int count;
         ArrayList<Double> oldPRList = new ArrayList<Double>(N+1);
         ArrayList<Double> newPRList = new ArrayList<Double>(N+1); 
@@ -107,28 +107,29 @@ public class Graph {
             // for ( Map.Entry<Integer, Integer> me:set ) {
             //     System.out.println(me.getKey() + "-->" + me.getValue());
             // }
-            Set<Map.Entry<Integer, Integer>> set1 = outLinkCount.entrySet();
-            System.out.println("out List: ");
-            for ( Map.Entry<Integer, Integer> me:set1 ) {
-                System.out.println(me.getKey() + "-->" + me.getValue());
-            }
+
+            // Set<Map.Entry<Integer, Integer>> set1 = outLinkCount.entrySet();
+            // System.out.println("out List: ");
+            // for ( Map.Entry<Integer, Integer> me:set1 ) {
+            //     System.out.println(me.getKey() + "-->" + me.getValue());
+            // }
     
             for ( int k = 1; k <= N; k++ ) {
                 double sumIncomingPR = 0.0; double pr = 0.0;
                 ArrayList<Integer> temp = getIncomingVertexList(k);
-                System.out.print("\nIncoming vertices of vertex " + k + ": ");
+                // System.out.print("\nIncoming vertices of vertex " + k + ": ");
                 if ( temp.size() > 0 ) {
                     for ( int i = 0; i < temp.size(); i++ ) { 
-                        System.out.print(temp.get(i) + " ");
+                        // System.out.print(temp.get(i) + " ");
                         int inpt1 = temp.get(i) - 1; int inpt2 = temp.get(i);
                         sumIncomingPR += (oldPRList.get(inpt1) / outLinkCount.get(inpt2));
                     }
                 }
                 pr = ((1.0 - df) / N) + df * sumIncomingPR;
-                System.out.println("pr of " + k + ": " + pr);
+                // System.out.println("pr of " + k + ": " + pr);
                 newPRList.set(k - 1, round(pr, 4)); 
             }
-            System.out.println("Iteratin no: " + x);
+            // System.out.println("Iteratin no: " + x);
             int check = 0;
             if ( x > 1 ) {
                 for( int i = 0; i < newPRList.size(); i++ ) {
@@ -137,15 +138,15 @@ public class Graph {
                     }
     
                     if ( check == newPRList.size() ) {
-                        System.out.println("yo");
+                        // System.out.println("yo");
                         return newPRList;
                     }
                 }
             }
     
-            System.out.println("\nNew PR list: ");
+            // System.out.println("\nNew PR list: ");
             for ( int i = 0; i < newPRList.size(); i++ ) {
-                System.out.println("vertex " + i + 1 + "-->" + newPRList.get(i));
+                // System.out.println("vertex " + i + 1 + "-->" + newPRList.get(i));
                 oldPRList.set(i, newPRList.get(i));
             }
             
