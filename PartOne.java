@@ -1,32 +1,72 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class PartOne {
     public static void main(String[] args) {
-        System.out.println("Enter Number of Vertices for Graph:");
-        Scanner s = new Scanner(System.in);
-        int vertex = s.nextInt();
-        Graph g = new Graph();
-        g.setVertex(vertex);
-        System.out.println("Enter edges for graph: (press 0 to stop adding edges)");
-        int startVertex = 0; int endVertex = 0; int count = 0;
-        int check = ( vertex * (vertex - 1 ) ) / 2;
+        // User input of Graph
+        
         while ( true ) {
-            if ( count == check )
+            Graph g = new Graph();
+            System.out.print("\nDo you need a page graph to be input: ");
+            Scanner inpt = new Scanner(System.in);
+            String choice = inpt.nextLine();
+            if ( choice.equals("Y") || choice.equals("y") || choice.equals("Yes") || choice.equals("yes") ) {
+                System.out.print("\nEnter Number of pages: ");
+                Scanner s = new Scanner(System.in);
+                int vertex = s.nextInt();
+                g.setVertex(vertex);
+                System.out.print("\nEnter number of page links: ");
+                Scanner pglnk = new Scanner(System.in);
+                int pglnks = pglnk.nextInt();
+                for ( int i = 1; i <= pglnks; i++ ) {
+                    System.out.print("\nPage link " + i + " from page: ");
+                    Scanner st = new Scanner(System.in);
+                    int start = st.nextInt();
+                    System.out.print("\nPage link " + i + " to page: ");
+                    Scanner ed = new Scanner(System.in);
+                    int end = ed.nextInt();
+                    g.addNewEdge(new Edge(start, end));
+                }
+                System.out.print("\nDamping Factor: ");
+                Scanner df = new Scanner(System.in);
+                double dampFact = df.nextDouble();
+                System.out.print("\nError limit: ");
+                int errLimit = df.nextInt();
+                System.out.print("\nIteration Limit: ");
+                int itLimit = df.nextInt();
+        
+                g.createGraphMatrix();
+                g.printGraphMatrix();
+                ArrayList<Double> pgList = g.calculatePageRank(g.getEdgeList(), errLimit, dampFact, itLimit);
+                if ( pgList != null ) {
+                    System.out.print("Result : [");
+                    for ( int i = 0; i < pgList.size(); i++ ) {
+                        System.out.print(pgList.get(i) + " ");
+                    }
+                    System.out.print("]");
+                } else {
+                    System.out.println("No solution as iteration limit exceeded!");
+                }
+            } else {
+                System.out.println("Bye!");
                 break;
-            System.out.println("Enter Start Vertex: ");
-            Scanner s1 = new Scanner(System.in);
-            startVertex = s1.nextInt();
-            if ( startVertex == 0 )
-                break;
-            System.out.println("Enter End Vertex: ");
-            Scanner s2 = new Scanner(System.in);
-            endVertex = s2.nextInt();
-            if ( endVertex == 0 ) 
-                break;
-            g.addNewEdge(new Edge(startVertex, endVertex));
-            count++;
+            }
         }
-        g.createGraphMatrix();
-        g.printGraphMatrix();
+        
+
+        // Fixed Input of Graph 
+        // Graph g = new Graph();
+        // int vertex = 5;
+        // g.setVertex(5);
+        // g.addNewEdge(new Edge(1,4));
+        // g.addNewEdge(new Edge(4,2));
+        // g.addNewEdge(new Edge(2,5));
+        // g.addNewEdge(new Edge(3,5));
+        // g.addNewEdge(new Edge(3,1));
+        // g.addNewEdge(new Edge(3,4));
+
+        // g.createGraphMatrix();
+        // g.printGraphMatrix();
+        
     }
 }
