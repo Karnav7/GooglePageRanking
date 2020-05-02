@@ -6,12 +6,13 @@ import java.util.Map;
 import java.util.Set;
 
 public class Graph {
-    private int vertex = 5;
-    private int[][] G = new int[vertex+1][vertex+1];
+    private int vertex;
+    private int[][] G;
     private ArrayList<Edge> edgeList = new ArrayList<Edge>();
 
     public void setVertex(int v) {
         this.vertex = v;
+        this.G = new int[vertex+1][vertex+1];
     }
 
     public int getVertex() {
@@ -19,6 +20,7 @@ public class Graph {
     }
 
     public void addNewEdge(Edge e) {
+        // if ( !this.edgeList.contains(e) )
         this.edgeList.add(e);
     }
 
@@ -138,7 +140,7 @@ public class Graph {
                     }
     
                     if ( check == newPRList.size() ) {
-                        // System.out.println("yo");
+                        // System.out.println("yo"+ x);
                         return newPRList;
                     }
                 }
