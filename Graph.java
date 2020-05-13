@@ -43,8 +43,14 @@ public class Graph {
     }
 
     public void printGraphMatrix() {
-        System.out.println("Graph Matrix: ");
+        System.out.println("Matrix reopresentation of graph: ");
+        System.out.print("x");
+        for ( int i = 1; i <= getVertex(); i++ )
+            System.out.print(" " + i);
+
+        System.out.println();
         for ( int i = 1; i <= getVertex(); i++ ) {
+            System.out.print(i + " ");
             for ( int j = 1; j <= getVertex(); j++ ) {
                 
                 System.out.print(getGraphMatrix()[i][j] + " ");
@@ -74,7 +80,7 @@ public class Graph {
         return list;
     }
 
-    public ArrayList<Double> calculatePageRank(ArrayList<Edge> edgelist, int error, double df, int il) {
+    public ArrayList<Double> calculatePageRank(ArrayList<Edge> edgelist, double error, double df, int il) {
         createGraphMatrix();
         int[][] matrix = getGraphMatrix();
         int N = getVertex();
@@ -135,7 +141,7 @@ public class Graph {
             int check = 0;
             if ( x > 1 ) {
                 for( int i = 0; i < newPRList.size(); i++ ) {
-                    if ( newPRList.get(i) - oldPRList.get(i) == error ) {
+                    if ( Math.abs(newPRList.get(i) - oldPRList.get(i)) <= error ) {
                         check++;
                     }
     

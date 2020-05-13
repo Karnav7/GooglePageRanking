@@ -31,14 +31,15 @@ public class PartOne {
                 Scanner df = new Scanner(System.in);
                 double dampFact = df.nextDouble();
                 System.out.print("\nError limit: ");
-                int errLimit = df.nextInt();
+                double errLimit = df.nextDouble();
                 System.out.print("\nIteration Limit: ");
                 int itLimit = df.nextInt();
         
-                g.createGraphMatrix();
+                // g.createGraphMatrix();
                 // g.printGraphMatrix();
                 ArrayList<Double> pgList = g.calculatePageRank(g.getEdgeList(), errLimit, dampFact, itLimit);
                 if ( pgList != null ) {
+                    g.printGraphMatrix();
                     System.out.print("Result : [");
                     String res = "";
                     for ( int i = 0; i < pgList.size(); i++ ) {
