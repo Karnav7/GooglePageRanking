@@ -15,6 +15,7 @@ public class PartOne {
                 Scanner s = new Scanner(System.in);
                 int vertex = s.nextInt();
                 g.setVertex(vertex);
+                g.createGraphAdjList();
                 System.out.print("\nEnter number of page links: ");
                 Scanner pglnk = new Scanner(System.in);
                 int pglnks = pglnk.nextInt();
@@ -25,7 +26,8 @@ public class PartOne {
                     System.out.print("\nPage link " + i + " to page: ");
                     Scanner ed = new Scanner(System.in);
                     int end = ed.nextInt();
-                    g.addNewEdge(new Edge(start, end));
+                    // g.addNewEdge(new Edge(start, end));
+                    g.addEdge(start, end);
                 }
                 System.out.print("\nDamping Factor: ");
                 Scanner df = new Scanner(System.in);
@@ -37,9 +39,11 @@ public class PartOne {
         
                 // g.createGraphMatrix();
                 // g.printGraphMatrix();
-                ArrayList<Double> pgList = g.calculatePageRank(g.getEdgeList(), errLimit, dampFact, itLimit);
+                // ArrayList<Double> pgList = g.calculatePageRank(g.getEdgeList(), errLimit, dampFact, itLimit);
+                ArrayList<Double> pgList = g.calculatePageRankAdj(g.getAdjList(), errLimit, dampFact, itLimit);
                 if ( pgList != null ) {
-                    g.printGraphMatrix();
+                    // g.printGraphMatrix();
+                    g.printGraph();
                     System.out.print("Result : [");
                     String res = "";
                     for ( int i = 0; i < pgList.size(); i++ ) {
